@@ -32,7 +32,7 @@ patch-wise/
 
 ## File Descriptions
 * **dataset.py:** Contains the carsData class for loading images and applying transformations. It also houses randomPatchify, which handles the algorithmic application of randomized occlusions to simulate missing data
-* **model.py:** Defines the ConvAutoencoder class. The encoder compresses the image from $225 \times 225$ to a $15 \times 15$ latent space, and the decoder reconstructs it back to the original dimensions
+* **model.py:** Defines the ConvAutoencoder class. The encoder compresses the image from **$225 \times 225$ to a $15 \times 15$** latent space, and the decoder reconstructs it back to the original dimensions
 * **main.ipynb:** The central hub for experimenting. It ties together the dataloaders, model instantiation, the PyTorch training loop (optimizing Mean Squared Error via Adam), and the matplotlib evaluation grids
 
 ### Prerequisites
@@ -51,7 +51,12 @@ pip install -r requirements.txt
 (Note: Dependencies include torch, torchvision, pillow, opencv-python, and matplotlib)
 
 ### Results
-The model is evaluated on a 20% validation split. Below is an example of the network's ability to reconstruct the missing information. (INSERT imgs here)
+The model is evaluated on a 20% validation split. Below is an example of the network's ability to reconstruct the missing information. All the reconstructions are blurry and hazy, mainly because of the simplicity of the architecture of the network and the loss that was used.
+- MSE Loss (L2 loss) was used, which translates to a reduced net loss for taking an averag eof pixel values. This averaging appears as a blurry output
+- Also, since this network is simple and does NOT include any skip connections (found in U-Net), there is a huge loss of information. In case of U-Net, the Decoder Net has access to the original image by use of these skip connections, however in our case, the decoder is completely reconstructing solely on the basis of the highly compressed latent vector.
+
+![Example of img reconstruction](imgs/reconstruction_ex1.png)
+![Example of img reconstruction](imgs/some_examples.png)
 
 
 
