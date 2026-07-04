@@ -25,3 +25,36 @@ patch-wise/
 │   └── utils.py            # Utility functions for patching and visualization
 ├── requirements.txt        # Project dependencies
 └── README.md
+```
+
+
+## File Descriptions
+* **dataset.py:** Contains the carsData class for loading images and applying transformations. It also houses randomPatchify, which handles the algorithmic application of randomized occlusions to simulate missing data
+* **model.py:** Defines the ConvAutoencoder class. The encoder compresses the image from $225 \times 225$ to a $15 \times 15$ latent space, and the decoder reconstructs it back to the original dimensions
+* **main.ipynb:** The central hub for experimenting. It ties together the dataloaders, model instantiation, the PyTorch training loop (optimizing Mean Squared Error via Adam), and the matplotlib evaluation grids
+
+### Prerequisites
+Python 3.8+
+
+### Installation
+Clone the repository:
+```Bash
+git clone [https://github.com/FORTFANOP/patch-wise.git](https://github.com/FORTFANOP/patch-wise.git)
+cd patch-wise
+```
+Install dependencies:
+```Bash
+pip install -r requirements.txt
+```
+(Note: Dependencies include torch, torchvision, pillow, opencv-python, and matplotlib)
+
+### Results
+The model is evaluated on a 20% validation split. Below is an example of the network's ability to reconstruct the missing information. (INSERT imgs here)
+
+
+
+## Future Improvements
+- [ ] Advanced Architectures: Transitioning from a standard Autoencoder to a U-Net architecture (adding skip connections) to preserve high-frequency spatial details and reduce blurriness in the reconstruction
+- [ ] Loss Function Upgrades: Replacing the standard Mean Squared Error (MSE) with a combination of Perceptual Loss (VGG) or Structural Similarity Index (SSIM) to encourage sharper, more visually realistic edges
+- [ ] Adversarial Training: Implementing a Discriminator network to turn this into a Generative Adversarial Network (GAN), forcing the inpainting to look indistinguishable from real data
+- [ ] Data Augmentation: Adding random horizontal flips, slight rotations, and color jitter to the base_transform to improve model generalization.
