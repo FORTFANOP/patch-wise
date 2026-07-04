@@ -1,5 +1,7 @@
 # Patch-Wise: Image Inpainting via Convolutional Autoencoders
 
+**NOTE: This project is still a WIP**
+
 Patch-Wise is a deep learning project that reconstructs corrupted images using a Convolutional Autoencoder built with PyTorch. It artificially corrupts training images by applying random black patches and trains a neural network to predict and fill in the missing spatial information (image inpainting), restoring the image to its original state.
 
 ## Project Overview
